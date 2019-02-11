@@ -17,6 +17,16 @@ actual class PlatformPreferences(
         private val delegate: SharedPreferences
 ) : Preferences {
 
+    override fun getString(key: String, defaultValue: String): String {
+        return delegate.getString(key, defaultValue) ?: defaultValue
+    }
+
+    override fun putString(key: String, value: String) {
+        delegate.edit()
+            .putString(key, value)
+            .apply()
+    }
+
     override fun getBoolean(key: String, defaultValue: Boolean): Boolean {
         return delegate.getBoolean(key, defaultValue)
     }
