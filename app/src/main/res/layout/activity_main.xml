@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ /*
+  ~  * Copyright (c) 2018 Rosberry. All rights reserved.
+  ~  */
+  -->
+
+<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+    android:name="com.rosberry.android.jigit.ui.launch.LaunchFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:tag="launch_fragment_tag" />
