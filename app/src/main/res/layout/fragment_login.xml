@@ -52,6 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="SighIn"
+        android:enabled="false"
         app:layout_constraintEnd_toEndOf="@id/passwordView"
         app:layout_constraintStart_toStartOf="@id/passwordView"
         app:layout_constraintTop_toBottomOf="@id/passwordView" />

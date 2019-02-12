@@ -27,4 +27,9 @@ class LoginPresenter @Inject constructor(
     private fun onResult(result: String) {
         Log.d("MPP_TEST", result)
     }
+
+    fun onCredentialChanged(username: String, password: String) {
+        val isValid = authInteractor.isValidCredentials(username, password)
+        viewState.isLoginEnable(isValid)
+    }
 }

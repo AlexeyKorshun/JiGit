@@ -11,6 +11,7 @@ import android.view.View
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.rosberry.android.core.ui.AppFragment
+import com.rosberry.android.extensions.doOnTextChanged
 import com.rosberry.android.jigit.R
 import com.rosberry.android.jigit.di.Scopes
 import com.rosberry.android.jigit.presentation.login.LoginPresenter
@@ -38,5 +39,17 @@ class LoginFragment : AppFragment(), LoginView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         loginButton.setOnClickListener { presenter.clickLogin(loginView.text.toString(), passwordView.text.toString()) }
+
+        loginView.doOnTextChanged { text, _, _, _ ->
+            presenter.onCredentialChanged(text.toString(), passwordView.text.toString())
+        }
+
+        passwordView.doOnTextChanged { text, _, _, _ ->
+            presenter.onCredentialChanged(loginView.text.toString(), text.toString())
+        }
+    }
+
+    override fun isLoginEnable(isEnabled: Boolean) {
+        loginButton.isEnabled = isEnabled
     }
 }
