@@ -7,6 +7,7 @@
 package com.rosberry.mpp.preferences
 
 import platform.Foundation.NSUserDefaults
+import platform.Foundation.setValue
 
 /**
  * @author Alexei Korshun on 06/02/2019.
@@ -21,6 +22,13 @@ actual class PlatformPreferences(
 
     override fun getBoolean(key: String, defaultValue: Boolean): Boolean =
             if (hasKey(key)) delegate.boolForKey(key) else defaultValue
+
+    override fun getString(key: String, defaultValue: String): String =
+            if (hasKey(key)) delegate.stringForKey(key) ?: defaultValue else defaultValue
+
+    override fun putString(key: String, value: String) {
+        delegate.setValue(value, forKey = key)
+    }
 
     private fun hasKey(key: String): Boolean = delegate.objectForKey(key) != null
 
