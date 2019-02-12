@@ -17,4 +17,8 @@ interface LoginView : MvpView {
 
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun isLoginEnable(isEnabled: Boolean)
+
+    fun isLoading(isLoading: Boolean)
+
+    fun isError(isError: Boolean, message: String = "")
 }

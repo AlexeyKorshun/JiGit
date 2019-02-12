@@ -12,6 +12,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.rosberry.android.core.ui.AppFragment
 import com.rosberry.android.extensions.doOnTextChanged
+import com.rosberry.android.extensions.show
 import com.rosberry.android.jigit.R
 import com.rosberry.android.jigit.di.Scopes
 import com.rosberry.android.jigit.presentation.login.LoginPresenter
@@ -51,5 +52,14 @@ class LoginFragment : AppFragment(), LoginView {
 
     override fun isLoginEnable(isEnabled: Boolean) {
         loginButton.isEnabled = isEnabled
+    }
+
+    override fun isLoading(isLoading: Boolean) {
+        showProgressDialog(isLoading)
+    }
+
+    override fun isError(isError: Boolean, message: String) {
+        errorMessageView.text = message
+        errorMessageView.show(isError)
     }
 }

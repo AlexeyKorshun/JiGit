@@ -21,14 +21,24 @@ class LoginPresenter @Inject constructor(
 ) : MvpPresenter<LoginView>() {
 
     fun clickLogin(username: String, password: String) {
-        authInteractor.auth(username, password) { onResult(it) }
+        viewState.isLoading(true)
+        viewState.isError(false)
+        authInteractor.auth(username, password, this::onResult, this::onError)
     }
 
     private fun onResult(result: String) {
+        viewState.isLoading(false)
         Log.d("MPP_TEST", result)
     }
 
+    private fun onError(error: Throwable) {
+        error.printStackTrace()
+        viewState.isLoading(false)
+        viewState.isError(true, error.localizedMessage)
+    }
+
     fun onCredentialChanged(username: String, password: String) {
+        viewState.isError(false)
         val isValid = authInteractor.isValidCredentials(username, password)
         viewState.isLoginEnable(isValid)
     }
