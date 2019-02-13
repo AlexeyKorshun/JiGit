@@ -44,6 +44,8 @@ kotlin {
         }
         iOSMain.dependencies {
             implementation "io.ktor:ktor-client-ios:1.1.2"
+            implementation "io.ktor:ktor-client-json-native:1.1.2"
+            implementation "io.ktor:ktor-client-logging-native:1.1.2"
         }
     }
 }
