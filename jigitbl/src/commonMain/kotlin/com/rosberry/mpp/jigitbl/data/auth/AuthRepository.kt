@@ -6,6 +6,8 @@
 
 package com.rosberry.mpp.jigitbl.data.auth
 
+import com.rosberry.mpp.jigitbl.entity.User
+
 /**
  * @author Alexei Korshun on 08/02/2019.
  */
@@ -25,5 +27,5 @@ class AuthRepository(
         }
         get() = authManager.password
 
-    suspend fun auth(username: String, password: String): String = authApi.auth(username, password)
+    suspend fun auth(username: String, password: String): User = authApi.auth(username, password)
 }

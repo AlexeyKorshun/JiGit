@@ -7,6 +7,7 @@
 package com.rosberry.mpp.jigitbl.domain
 
 import com.rosberry.mpp.jigitbl.data.auth.AuthRepository
+import com.rosberry.mpp.jigitbl.entity.User
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -25,11 +26,11 @@ class AuthInteractor(
     fun isValidCredentials(username: String, password: String): Boolean =
             username.isNotBlank() && password.isNotBlank()
 
-    fun auth(username: String, password: String, onSuccess: (String) -> Unit, onError: (Throwable) -> Unit) {
+    fun auth(username: String, password: String, onSuccess: (User) -> Unit, onError: (Throwable) -> Unit) {
         GlobalScope.apply {
             launch(ApplicationDispatcher) {
                 try {
-                    val result: String = withContext(Dispatchers.Default) {
+                    val result: User = withContext(Dispatchers.Default) {
                         authRepository.auth(username, password)
                     }
                     onSuccess.invoke(result)

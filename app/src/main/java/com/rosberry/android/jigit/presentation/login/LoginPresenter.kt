@@ -10,6 +10,7 @@ import android.util.Log
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.rosberry.mpp.jigitbl.domain.AuthInteractor
+import com.rosberry.mpp.jigitbl.entity.User
 import javax.inject.Inject
 
 /**
@@ -26,9 +27,9 @@ class LoginPresenter @Inject constructor(
         authInteractor.auth(username, password, this::onResult, this::onError)
     }
 
-    private fun onResult(result: String) {
+    private fun onResult(user: User) {
         viewState.isLoading(false)
-        Log.d("MPP_TEST", result)
+        Log.d("MPP_TEST", user.login + user.id)
     }
 
     private fun onError(error: Throwable) {

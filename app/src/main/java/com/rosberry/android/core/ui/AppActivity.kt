@@ -23,7 +23,7 @@ abstract class AppActivity : MvpAppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(layoutRes)
+        if (savedInstanceState == null) setContentView(layoutRes)
     }
 
     override fun onResumeFragments() {
