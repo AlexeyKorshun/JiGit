@@ -8,6 +8,7 @@ package com.rosberry.android.jigit
 
 import androidx.fragment.app.Fragment
 import com.rosberry.android.jigit.ui.login.LoginFragment
+import com.rosberry.android.jigit.ui.repositories.RepositoriesFragment
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 
 /**
@@ -18,5 +19,10 @@ object Screens {
     class LoginScreen : SupportAppScreen() {
 
         override fun getFragment(): Fragment = LoginFragment()
+    }
+
+    class RepositoriesScreen: SupportAppScreen() {
+
+        override fun getFragment(): Fragment = RepositoriesFragment()
     }
 }

@@ -28,6 +28,8 @@ class AuthInteractor(
         GlobalScope.launch(ApplicationDispatcher) {
             try {
                 val result: User = authRepository.auth(username, password)
+                authRepository.username = username
+                authRepository.password = password
                 onSuccess.invoke(result)
             } catch (e: Throwable) {
                 onError.invoke(e)

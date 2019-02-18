@@ -26,5 +26,6 @@ class LaunchPresenter @Inject constructor(
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         if (authInteractor.isAuth().not()) router.newRootScreen(Screens.LoginScreen())
+        else router.newRootScreen(Screens.RepositoriesScreen())
     }
 }
