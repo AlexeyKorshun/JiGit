@@ -8,11 +8,8 @@ package com.rosberry.mpp.jigitbl.domain
 
 import com.rosberry.mpp.jigitbl.data.auth.AuthRepository
 import com.rosberry.mpp.jigitbl.entity.User
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import kotlin.coroutines.CoroutineContext
 
 /**
  * @author Alexei Korshun on 06/02/2019.
@@ -40,14 +37,4 @@ class AuthInteractor(
             }
         }
     }
-}
-
-internal expect val MainDispatcher: CoroutineDispatcher
-
-internal class InteractorScope: CoroutineScope {
-    private val dispatcher = MainDispatcher
-    private val job = Job()
-
-    override val coroutineContext: CoroutineContext
-        get() = dispatcher + job
 }

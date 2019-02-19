@@ -4,7 +4,7 @@
  *
  */
 
-package com.rosberry.mpp.jigitbl.domain
+package com.rosberry.mpp.coroutines
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Runnable
