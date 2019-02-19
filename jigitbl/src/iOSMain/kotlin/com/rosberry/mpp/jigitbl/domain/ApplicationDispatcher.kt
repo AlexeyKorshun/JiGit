@@ -12,9 +12,9 @@ import platform.darwin.dispatch_async
 import platform.darwin.dispatch_get_main_queue
 import kotlin.coroutines.CoroutineContext
 
-internal actual val ApplicationDispatcher: CoroutineDispatcher = MainDispatcher()
+internal actual val MainDispatcher: CoroutineDispatcher = IOSDispatcher()
 
-private class MainDispatcher: CoroutineDispatcher() {
+private class IOSDispatcher: CoroutineDispatcher() {
     override fun dispatch(context: CoroutineContext, block: Runnable) {
         dispatch_async(dispatch_get_main_queue()) { block.run() }
     }
