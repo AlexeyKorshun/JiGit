@@ -9,10 +9,11 @@ package com.rosberry.mpp.jigitbl.entity
 import kotlinx.serialization.Serializable
 
 /**
- * @author Alexei Korshun on 13/02/2019.
+ * @author Alexei Korshun on 19/02/2019.
  */
 @Serializable
-data class User(
-        val login: String,
-        val id: Int
+data class Repository(
+        val id: Int,
+        val name: String,
+        val owner: User
 )
