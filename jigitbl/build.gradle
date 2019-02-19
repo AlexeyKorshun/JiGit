@@ -37,9 +37,9 @@ kotlin {
         }
         androidMain.dependencies {
             implementation 'org.jetbrains.kotlin:kotlin-stdlib'
-            implementation "io.ktor:ktor-client-android:1.1.2"
-            implementation "io.ktor:ktor-client-json-jvm:1.1.2"
-            implementation "io.ktor:ktor-client-logging-jvm:1.1.2"
+            api "io.ktor:ktor-client-android:1.1.2"
+            api "io.ktor:ktor-client-json-jvm:1.1.2"
+            api "io.ktor:ktor-client-logging-jvm:1.1.2"
             implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.1"
         }
         iOSMain.dependencies {

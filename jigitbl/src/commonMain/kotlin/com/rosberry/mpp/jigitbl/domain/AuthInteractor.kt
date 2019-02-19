@@ -6,6 +6,7 @@
 
 package com.rosberry.mpp.jigitbl.domain
 
+import com.rosberry.mpp.coroutines.MainScope
 import com.rosberry.mpp.jigitbl.data.auth.AuthRepository
 import com.rosberry.mpp.jigitbl.entity.User
 import kotlinx.coroutines.CoroutineScope
@@ -18,7 +19,7 @@ class AuthInteractor(
         private val authRepository: AuthRepository
 ) {
 
-    private var scope: CoroutineScope = InteractorScope()
+    private var scope: CoroutineScope = MainScope()
 
     fun isAuth(): Boolean = authRepository.username.isNotBlank() && authRepository.password.isNotBlank()
 
