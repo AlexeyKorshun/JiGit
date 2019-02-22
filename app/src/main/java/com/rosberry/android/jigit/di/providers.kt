@@ -12,6 +12,8 @@ import com.rosberry.mpp.jigitbl.data.auth.AuthRepository
 import com.rosberry.mpp.jigitbl.domain.AuthInteractor
 import com.rosberry.mpp.preferences.PlatformPreferences
 import io.ktor.client.HttpClient
+import io.ktor.client.features.auth.Auth
+import io.ktor.client.features.auth.providers.basic
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
 import io.ktor.client.features.logging.LogLevel
@@ -25,7 +27,9 @@ import javax.inject.Provider
 /**
  * @author Alexei Korshun on 11/02/2019.
  */
-internal class HttpClientProvider @Inject constructor() : Provider<HttpClient> {
+internal class HttpClientProvider @Inject constructor(
+        private val authManager: AuthManager
+) : Provider<HttpClient> {
 
     override fun get(): HttpClient {
         return HttpClient {
@@ -35,6 +39,12 @@ internal class HttpClientProvider @Inject constructor() : Provider<HttpClient> {
             install(Logging) {
                 logger = Logger.SIMPLE
                 level = LogLevel.ALL
+            }
+            install(Auth) {
+                basic {
+                    username = authManager.username
+                    password = authManager.password
+                }
             }
         }
     }
