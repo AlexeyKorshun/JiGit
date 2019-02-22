@@ -26,11 +26,9 @@ class AuthApi(
     @UseExperimental(InternalAPI::class)
     suspend fun auth(username: String, password: String): User {
         val credentials = "$username:$password"
-
         val token: String = "Basic " + credentials.encodeBase64()
 
         val builder = HttpRequestBuilder()
-
         with(builder) {
             header("Authorization", token)
             method = HttpMethod.Get
