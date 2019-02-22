@@ -13,48 +13,18 @@ import com.rosberry.mpp.jigitbl.data.repositories.RepositoriesRepository
 import com.rosberry.mpp.jigitbl.data.repositories.RepositoryApi
 import com.rosberry.mpp.jigitbl.domain.AuthInteractor
 import com.rosberry.mpp.jigitbl.domain.RepositoriesInteractor
-import com.rosberry.mpp.jigitbl.entity.Repository
+import com.rosberry.mpp.ktor.KtorFactory
 import com.rosberry.mpp.preferences.PlatformPreferences
 import io.ktor.client.HttpClient
-import io.ktor.client.features.auth.Auth
-import io.ktor.client.features.auth.providers.basic
-import io.ktor.client.features.json.JsonFeature
-import io.ktor.client.features.json.serializer.KotlinxSerializer
-import io.ktor.client.features.logging.LogLevel
-import io.ktor.client.features.logging.Logger
-import io.ktor.client.features.logging.Logging
-import io.ktor.client.features.logging.SIMPLE
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.list
 import javax.inject.Inject
 import javax.inject.Provider
 
 /**
  * @author Alexei Korshun on 11/02/2019.
  */
-internal class HttpClientProvider @Inject constructor(
-        private val authManager: AuthManager
-) : Provider<HttpClient> {
+internal class HttpClientProvider @Inject constructor() : Provider<HttpClient> {
 
-    override fun get(): HttpClient {
-        return HttpClient {
-            install(JsonFeature) {
-                serializer = KotlinxSerializer(Json.nonstrict).apply {
-                    register(Repository.serializer().list)
-                }
-            }
-            install(Logging) {
-                logger = Logger.SIMPLE
-                level = LogLevel.ALL
-            }
-            install(Auth) {
-                basic {
-                    username = authManager.username
-                    password = authManager.password
-                }
-            }
-        }
-    }
+    override fun get(): HttpClient = KtorFactory().createKtor()
 }
 
 internal class AuthApiProvider @Inject constructor(
