@@ -6,10 +6,10 @@
 
 package com.rosberry.android.jigit.presentation.repositories
 
-import android.util.Log
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.rosberry.mpp.jigitbl.domain.RepositoriesInteractor
+import com.rosberry.mpp.jigitbl.entity.Repository
 import javax.inject.Inject
 
 /**
@@ -22,9 +22,19 @@ class RepositoriesPresenter @Inject constructor(
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        repositoriesInteractor.getRepositories(
-                { repositories -> Log.d("REPOSITORIES: ", repositories.toString()) },
-                { exception -> Log.e("REPOSITORIES: ", exception.localizedMessage, exception) }
-        )
+        viewState.showProgress(true)
+        repositoriesInteractor.getRepositories(this::onReceiveRepositories, this::onError)
+    }
+
+    private fun onReceiveRepositories(repositories: List<Repository>) {
+        viewState.showError(false)
+        viewState.showProgress(false)
+        viewState.showRepositories(repositories)
+    }
+
+    private fun onError(exception: Throwable) {
+        exception.printStackTrace()
+        viewState.showProgress(false)
+        viewState.showError(true, exception.localizedMessage)
     }
 }

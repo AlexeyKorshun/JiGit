@@ -5,15 +5,20 @@
   -->
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView android:id="@+id/repositoriesListView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-    <TextView android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Repositories"/>
+        android:visibility="gone" />
+
+    <TextView android:id="@+id/errorMessageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        tools:text="Repositories" />
 
 </FrameLayout>
