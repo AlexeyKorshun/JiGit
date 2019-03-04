@@ -6,6 +6,7 @@
 
 package com.rosberry.mpp.jigitbl.data.repositories
 
+import com.rosberry.mpp.jigitbl.data.ApiHeaders
 import com.rosberry.mpp.jigitbl.data.ApiUrls
 import com.rosberry.mpp.jigitbl.data.auth.AuthManager
 import com.rosberry.mpp.jigitbl.entity.Repository
@@ -29,11 +30,11 @@ class RepositoryApi(
     @UseExperimental(InternalAPI::class)
     suspend fun getRepositories(): List<Repository> {
         val credentials = "${authManager.username}:${authManager.password}"
-        val token: String = "Basic " + credentials.encodeBase64()
+        val token = "${ApiHeaders.BASIC} ${credentials.encodeBase64()}"
 
         val builder = HttpRequestBuilder()
         with(builder) {
-            header("Authorization", token)
+            header(ApiHeaders.AUTHORIZATION, token)
             method = HttpMethod.Get
             url {
                 it.protocol = URLProtocol.HTTPS

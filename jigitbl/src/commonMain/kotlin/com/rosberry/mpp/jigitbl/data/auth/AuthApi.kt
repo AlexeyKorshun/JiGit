@@ -6,6 +6,7 @@
 
 package com.rosberry.mpp.jigitbl.data.auth
 
+import com.rosberry.mpp.jigitbl.data.ApiHeaders
 import com.rosberry.mpp.jigitbl.data.ApiUrls
 import com.rosberry.mpp.jigitbl.entity.User
 import io.ktor.client.HttpClient
@@ -27,11 +28,11 @@ class AuthApi(
     @UseExperimental(InternalAPI::class)
     suspend fun auth(username: String, password: String): User {
         val credentials = "$username:$password"
-        val token: String = "Basic " + credentials.encodeBase64()
+        val token = "${ApiHeaders.BASIC} ${credentials.encodeBase64()}"
 
         val builder = HttpRequestBuilder()
         with(builder) {
-            header("Authorization", token)
+            header(ApiHeaders.AUTHORIZATION, token)
             method = HttpMethod.Get
             url {
                 it.protocol = URLProtocol.HTTPS

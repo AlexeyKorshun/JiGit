@@ -15,3 +15,9 @@ object ApiUrls {
     internal const val REPOSITORIES: String = "user/repos"
     internal const val USER: String = "user"
 }
+
+object ApiHeaders {
+
+    internal const val AUTHORIZATION = "Authorization"
+    internal const val BASIC = "Basic"
+}
