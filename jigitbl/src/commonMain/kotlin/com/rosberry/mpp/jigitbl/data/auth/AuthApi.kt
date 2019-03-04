@@ -6,6 +6,7 @@
 
 package com.rosberry.mpp.jigitbl.data.auth
 
+import com.rosberry.mpp.jigitbl.data.ApiUrls
 import com.rosberry.mpp.jigitbl.entity.User
 import io.ktor.client.HttpClient
 import io.ktor.client.request.HttpRequestBuilder
@@ -34,8 +35,8 @@ class AuthApi(
             method = HttpMethod.Get
             url {
                 it.protocol = URLProtocol.HTTPS
-                it.host = "api.github.com"
-                it.path("user")
+                it.host = ApiUrls.HOST
+                it.path(ApiUrls.USER)
             }
         }
 

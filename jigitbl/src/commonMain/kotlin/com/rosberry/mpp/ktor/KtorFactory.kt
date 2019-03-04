@@ -7,6 +7,7 @@
 package com.rosberry.mpp.ktor
 
 import com.rosberry.mpp.jigitbl.entity.Repository
+import com.rosberry.mpp.jigitbl.entity.User
 import io.ktor.client.HttpClient
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
@@ -27,6 +28,7 @@ class KtorFactory {
             install(JsonFeature) {
                 serializer = KotlinxSerializer(Json.nonstrict).apply {
                     register(Repository.serializer().list)
+                    register(User.serializer())
                 }
             }
             install(Logging) {

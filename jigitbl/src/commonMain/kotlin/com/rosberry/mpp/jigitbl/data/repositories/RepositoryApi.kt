@@ -6,6 +6,7 @@
 
 package com.rosberry.mpp.jigitbl.data.repositories
 
+import com.rosberry.mpp.jigitbl.data.ApiUrls
 import com.rosberry.mpp.jigitbl.data.auth.AuthManager
 import com.rosberry.mpp.jigitbl.entity.Repository
 import io.ktor.client.HttpClient
@@ -36,8 +37,8 @@ class RepositoryApi(
             method = HttpMethod.Get
             url {
                 it.protocol = URLProtocol.HTTPS
-                it.host = "api.github.com"
-                it.path("user/repos")
+                it.host = ApiUrls.HOST
+                it.path(ApiUrls.REPOSITORIES)
             }
         }
 
