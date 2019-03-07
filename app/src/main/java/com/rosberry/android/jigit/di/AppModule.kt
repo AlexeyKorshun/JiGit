@@ -7,13 +7,16 @@
 package com.rosberry.android.jigit.di
 
 import android.content.Context
+import com.rosberry.mpp.delight.SqlDriverFactory
 import com.rosberry.mpp.jigitbl.data.auth.AuthApi
 import com.rosberry.mpp.jigitbl.data.auth.AuthManager
 import com.rosberry.mpp.jigitbl.data.auth.AuthRepository
 import com.rosberry.mpp.jigitbl.data.repositories.RepositoriesRepository
 import com.rosberry.mpp.jigitbl.data.repositories.RepositoryApi
+import com.rosberry.mpp.jigitbl.data.repositories.RepositoryDb
 import com.rosberry.mpp.jigitbl.domain.AuthInteractor
 import com.rosberry.mpp.jigitbl.domain.RepositoriesInteractor
+import com.rosberry.mpp.network.NetworkManagerFactory
 import com.rosberry.mpp.preferences.PlatformPreferences
 import io.ktor.client.HttpClient
 import ru.terrakok.cicerone.Cicerone
@@ -33,6 +36,11 @@ class AppModule(context: Context) : Module() {
         bind(PlatformPreferences.Factory::class.java).toInstance(PlatformPreferences.Factory(context))
 
         bind(HttpClient::class.java).toProvider(HttpClientProvider::class.java)
+
+        bind(NetworkManagerFactory::class.java).toInstance(NetworkManagerFactory())
+
+        bind(SqlDriverFactory::class.java).toProvider(SqlDriverFactoryProvider::class.java)
+        bind(RepositoryDb::class.java).toProvider(RepositoryDbProvider::class.java)
 
         bind(AuthManager::class.java).toProvider(AuthManagerProvider::class.java)
         bind(AuthApi::class.java).toProvider(AuthApiProvider::class.java)

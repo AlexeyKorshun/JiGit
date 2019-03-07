@@ -6,14 +6,18 @@
 
 package com.rosberry.android.jigit.di
 
+import android.content.Context
+import com.rosberry.mpp.delight.SqlDriverFactory
 import com.rosberry.mpp.jigitbl.data.auth.AuthApi
 import com.rosberry.mpp.jigitbl.data.auth.AuthManager
 import com.rosberry.mpp.jigitbl.data.auth.AuthRepository
 import com.rosberry.mpp.jigitbl.data.repositories.RepositoriesRepository
 import com.rosberry.mpp.jigitbl.data.repositories.RepositoryApi
+import com.rosberry.mpp.jigitbl.data.repositories.RepositoryDb
 import com.rosberry.mpp.jigitbl.domain.AuthInteractor
 import com.rosberry.mpp.jigitbl.domain.RepositoriesInteractor
 import com.rosberry.mpp.ktor.KtorFactory
+import com.rosberry.mpp.network.NetworkManagerFactory
 import com.rosberry.mpp.preferences.PlatformPreferences
 import io.ktor.client.HttpClient
 import javax.inject.Inject
@@ -64,11 +68,35 @@ internal class RepositoriesApiProvider @Inject constructor(
     override fun get(): RepositoryApi = RepositoryApi(httpClient, authManager)
 }
 
+internal class SqlDriverFactoryProvider @Inject constructor(
+        private val context: Context
+) : Provider<SqlDriverFactory> {
+
+    override fun get(): SqlDriverFactory {
+        return SqlDriverFactory(context)
+    }
+}
+
+internal class RepositoryDbProvider @Inject constructor(
+        private val sqlDriverProvider: SqlDriverFactory
+) : Provider<RepositoryDb> {
+
+    override fun get(): RepositoryDb {
+        return RepositoryDb(sqlDriverProvider)
+    }
+}
+
 internal class RepositoriesRepositoryProvider @Inject constructor(
-        private val repositoriesApi: RepositoryApi
+        private val networkManagerFactory: NetworkManagerFactory,
+        private val repositoriesApi: RepositoryApi,
+        private val repositoryDb: RepositoryDb
 ) : Provider<RepositoriesRepository> {
 
-    override fun get(): RepositoriesRepository = RepositoriesRepository(repositoriesApi)
+    override fun get(): RepositoriesRepository = RepositoriesRepository(
+            networkManagerFactory,
+            repositoriesApi,
+            repositoryDb
+    )
 }
 
 internal class RepositoriesInteractorProvider @Inject constructor(
