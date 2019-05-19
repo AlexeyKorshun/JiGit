@@ -16,5 +16,5 @@ actual class NetworkManagerFactory : NetworkManager.Factory {
 
 class PlatformNetworkManager : NetworkManager {
 
-    override fun isInternetAvailable(): Boolean = TODO("implement when start iOS")
+    override suspend fun isInternetAvailable(): Boolean = TODO("implement when start iOS")
 }

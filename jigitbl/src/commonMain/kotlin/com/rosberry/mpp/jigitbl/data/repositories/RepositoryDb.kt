@@ -38,4 +38,13 @@ class RepositoryDb(
             }
             .toList()
     }
+
+    fun saveRepositories(repos: List<Repository>) {
+        repositoryQueries.clear()
+        repos.asSequence()
+            .forEach {
+                ownerQueries.insertOwner(it.owner.id, it.owner.login)
+                repositoryQueries.insertRepository(it.id, it.name, it.owner.id)
+            }
+    }
 }

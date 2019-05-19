@@ -22,7 +22,14 @@ class RepositoriesRepository(
     private val networkManager: NetworkManager = networkManagerFactory.create()
 
     suspend fun getMyRepositories(): List<Repository> {
-        return if (networkManager.isInternetAvailable()) repositoriesApi.getRepositories()
+        val isNetworkAvailable: Boolean = networkManager.isInternetAvailable()
+        return if (isNetworkAvailable) fetchRepositoriesFromNetwork()
         else repositoryDb.getAllRepositories()
+    }
+
+    private suspend fun fetchRepositoriesFromNetwork(): List<Repository> {
+        val result = repositoriesApi.getRepositories()
+        repositoryDb.saveRepositories(result)
+        return result
     }
 }

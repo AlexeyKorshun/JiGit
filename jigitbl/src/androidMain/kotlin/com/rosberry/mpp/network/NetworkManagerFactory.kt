@@ -20,14 +20,13 @@ actual class NetworkManagerFactory : NetworkManager.Factory {
 
 private class PlatformNetworkManager : NetworkManager {
 
-    override fun isInternetAvailable(): Boolean {
+    override suspend fun isInternetAvailable(): Boolean {
         return try {
             val ipAddr = InetAddress.getByName("google.com")
-            //You can replace it with your name
             !ipAddr.equals("")
         } catch (e: Exception) {
+            e.printStackTrace()
             false
         }
     }
 }
-

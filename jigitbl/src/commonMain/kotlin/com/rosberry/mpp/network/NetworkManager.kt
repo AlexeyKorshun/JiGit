@@ -11,7 +11,7 @@ package com.rosberry.mpp.network
  */
 interface NetworkManager {
 
-    fun isInternetAvailable(): Boolean
+    suspend fun isInternetAvailable(): Boolean
 
     interface Factory {
 
