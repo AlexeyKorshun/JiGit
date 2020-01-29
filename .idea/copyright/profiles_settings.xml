@@ -1,5 +1,5 @@
 <component name="CopyrightManager">
-  <settings default="Rosberry">
+  <settings>
     <module2copyright>
       <element module="All" copyright="Rosberry" />
     </module2copyright>

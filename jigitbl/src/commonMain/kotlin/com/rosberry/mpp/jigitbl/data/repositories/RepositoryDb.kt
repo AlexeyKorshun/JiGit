@@ -8,8 +8,8 @@ package com.rosberry.mpp.jigitbl.data.repositories
 
 import com.rosberry.mpp.delight.SqlDriverFactory
 import com.rosberry.mpp.jigitbl.JigitDatabase
-import com.rosberry.mpp.jigitbl.OwnerQueries
-import com.rosberry.mpp.jigitbl.RepositoryQueries
+import com.rosberry.mpp.jigitbl.OwnerEntityQueries
+import com.rosberry.mpp.jigitbl.RepositoryEntityQueries
 import com.rosberry.mpp.jigitbl.data.DatabaseConst
 import com.rosberry.mpp.jigitbl.entity.Repository
 import com.rosberry.mpp.jigitbl.entity.User
@@ -24,8 +24,8 @@ class RepositoryDb(
 
     private val sqlDriver: SqlDriver = sqlDriverFactory.create(DatabaseConst.DATABASE_NAME)
     private val database: JigitDatabase = JigitDatabase(sqlDriver)
-    private val repositoryQueries: RepositoryQueries = database.repositoryQueries
-    private val ownerQueries: OwnerQueries = database.ownerQueries
+    private val repositoryQueries: RepositoryEntityQueries = database.repositoryEntityQueries
+    private val ownerQueries: OwnerEntityQueries = database.ownerEntityQueries
 
     fun getAllRepositories(): List<Repository> {
         return repositoryQueries.selectAll()

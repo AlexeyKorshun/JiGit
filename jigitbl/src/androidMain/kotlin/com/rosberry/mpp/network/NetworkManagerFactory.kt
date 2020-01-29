@@ -22,8 +22,8 @@ private class PlatformNetworkManager : NetworkManager {
 
     override suspend fun isInternetAvailable(): Boolean {
         return try {
-            val ipAddr = InetAddress.getByName("google.com")
-            !ipAddr.equals("")
+            InetAddress.getByName("google.com")
+            true
         } catch (e: Exception) {
             e.printStackTrace()
             false
