@@ -8,7 +8,7 @@ package com.rosberry.mpp.delight
 
 import com.rosberry.mpp.jigitbl.JigitDatabase
 import com.squareup.sqldelight.db.SqlDriver
-import com.squareup.sqldelight.drivers.ios.NativeSqliteDriver
+import com.squareup.sqldelight.drivers.native.NativeSqliteDriver
 
 /**
  * @author Alexei Korshun on 07/03/2019.
