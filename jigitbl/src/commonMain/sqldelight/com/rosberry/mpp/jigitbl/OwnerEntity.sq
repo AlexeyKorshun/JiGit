@@ -1,0 +1,20 @@
+CREATE TABLE IF NOT EXISTS ownerentity (
+  id INTEGER AS Int UNIQUE NOT NULL PRIMARY KEY,
+  login TEXT NOT NULL
+);
+
+selectAll:
+SELECT *
+FROM ownerentity;
+
+selectById:
+SELECT *
+FROM ownerentity
+WHERE id = ?;
+
+insertOwner:
+INSERT OR REPLACE INTO ownerentity (id, login)
+VALUES (?, ?);
+
+clear:
+DELETE FROM ownerentity;

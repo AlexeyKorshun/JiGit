@@ -39,7 +39,7 @@ class LoginPresenter @Inject constructor(
     private fun onError(error: Throwable) {
         error.printStackTrace()
         viewState.isLoading(false)
-        viewState.isError(true, error.localizedMessage)
+        viewState.isError(true, error.localizedMessage ?: "empty error")
     }
 
     fun onCredentialChanged(username: String, password: String) {
