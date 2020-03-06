@@ -35,6 +35,6 @@ class RepositoriesPresenter @Inject constructor(
     private fun onError(exception: Throwable) {
         exception.printStackTrace()
         viewState.showProgress(false)
-        viewState.showError(true, exception.localizedMessage)
+        viewState.showError(true, exception.localizedMessage ?: "empty error")
     }
 }
