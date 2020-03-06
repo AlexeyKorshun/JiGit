@@ -38,7 +38,7 @@ kotlin {
 
     def ktor = '1.3.1'
     def coroutines = '1.3.3'
-    def sql = '1.2.2'
+    def sql = '1.2.1'
 
     sourceSets {
         commonMain{
@@ -67,7 +67,7 @@ kotlin {
         iosMain {
             dependencies {
                 implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-native:$coroutines"
-                implementation "com.squareup.sqldelight:native-driver:$sql"
+                implementation "com.squareup.sqldelight:ios-driver:$sql"
                 api "io.ktor:ktor-client-ios:$ktor"
                 api "io.ktor:ktor-client-json-native:$ktor"
                 api "io.ktor:ktor-client-logging-native:$ktor"
