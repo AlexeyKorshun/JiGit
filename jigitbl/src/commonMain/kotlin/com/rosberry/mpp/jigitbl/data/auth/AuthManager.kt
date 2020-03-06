@@ -21,13 +21,13 @@ class AuthManager constructor(
         private const val KEY_PASSWORD = "key_password"
     }
 
+    private val storage: Preferences by lazy { factory.create(AUTH_STORE_NAME) }
+
     var username: String
-        set(value) = getStorage().putString(KEY_USERNAME, value)
-        get() = getStorage().getString(KEY_USERNAME)
+        set(value) = storage.putString(KEY_USERNAME, value)
+        get() = storage.getString(KEY_USERNAME)
 
     var password: String
-        set(value) = getStorage().putString(KEY_PASSWORD, value)
-        get() = getStorage().getString(KEY_PASSWORD)
-
-    private fun getStorage(): Preferences = factory.create(AUTH_STORE_NAME)
+        set(value) = storage.putString(KEY_PASSWORD, value)
+        get() = storage.getString(KEY_PASSWORD)
 }
