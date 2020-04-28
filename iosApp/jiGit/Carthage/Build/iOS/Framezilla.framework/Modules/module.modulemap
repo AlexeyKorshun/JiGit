@@ -1,0 +1,11 @@
+framework module Framezilla {
+  umbrella header "Framezilla.h"
+
+  export *
+  module * { export * }
+}
+
+module Framezilla.Swift {
+    header "Framezilla-Swift.h"
+    requires objc
+}
